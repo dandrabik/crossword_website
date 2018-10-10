@@ -3,7 +3,7 @@ a { color: #22a7f0; }
 body.home {
   margin: 0;
   padding: 0;
-  background-color: #e0fffd;
+  background-color: #C5EFF7;
   background-size: cover;
   min-height: 50vh;
 }
@@ -18,9 +18,8 @@ body.home {
 #coming-soon h2 {
   font-family: "Helvetica", Arial, serif;
   font-size: 28px;
-  color: #42E695;
+  color: #52b3d9;
   text-transform: uppercase;
-  text-shadow: 1px 1px #e5e5e5;
 }
 
 /* privacy and terms page */
