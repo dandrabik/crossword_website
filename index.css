@@ -1,4 +1,4 @@
-a { color: #22a7f0; }
+a { color: #52b3d9; }
 
 body.home {
   margin: 0;
@@ -20,6 +20,24 @@ body.home {
   font-size: 28px;
   color: #52b3d9;
   text-transform: uppercase;
+}
+
+body.beta {
+  padding-top: 20px;
+  background-color: #f7faff;
+}
+body.beta h2 {
+  font-family: "Cutive", serif;
+  margin-bottom: 0.2em;
+  padding: 0;
+}
+body.beta h4 {
+  text-transform: uppercase;
+}
+
+.button-blue {
+  background-color: #52b3d9;
+  border-color: #52b3d9;
 }
 
 /* privacy and terms page */
