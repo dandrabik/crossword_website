@@ -3,7 +3,7 @@ a { color: #52b3d9; }
 body.home {
   margin: 0;
   padding: 0;
-  background-color: #C5EFF7;
+  background-color: #f7faff;
   background-size: cover;
   min-height: 50vh;
 }
@@ -16,7 +16,7 @@ body.home {
   padding: 20px;
 }
 #coming-soon h2 {
-  font-family: "Helvetica", Arial, serif;
+  font-family: "Helvetica-Nueue", Arial, serif;
   font-size: 28px;
   color: #52b3d9;
   text-transform: uppercase;
@@ -33,6 +33,48 @@ body.beta h2 {
 }
 body.beta h4 {
   text-transform: uppercase;
+}
+
+.logoH {
+  vertical-align: middle;
+}
+
+body.index {
+  padding-top: 20px;
+  background-color: #f7faff;
+}
+body.index p {
+  color: #394444;
+}
+body.index h2 {
+  font-family: "Helvetica", Arial, serif;
+  font-weight: bold;
+  font-size: 36px;
+  margin-top: 20px;
+  color: #2e3131;
+}
+body.index h3 {
+  margin-top: 20px;
+  color: #2e3131;
+}
+.name {
+  margin-left: 10px;
+}
+.large-screen-only {
+  display: none;
+}
+
+.small-screen-only h5 {
+  text-align: center;
+}
+@media (min-width: 40.0rem) {
+  .large-screen-only {
+    display: block;
+  }
+  .small-screen-only {
+    display: none;
+  }
+
 }
 
 .button-blue {
