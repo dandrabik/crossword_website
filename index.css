@@ -64,7 +64,7 @@ body.index h3 {
   display: none;
 }
 
-.small-screen-only h5 {
+.small-screen-only h5.center {
   text-align: center;
 }
 @media (min-width: 40.0rem) {
