@@ -57,8 +57,14 @@ body.index h3 {
   margin-top: 20px;
   color: #2e3131;
 }
+body.index h5, body.index h4 {
+  color: #6b8182;
+}
 .name {
   margin-left: 10px;
+}
+.mb-2 {
+  margin-bottom: 0.4em;
 }
 .large-screen-only {
   display: none;
