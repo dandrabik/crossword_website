@@ -211,10 +211,15 @@
     hero.innerHTML = `<figure class="image is-square"><img src="${heroPath}" alt=""></figure>`;
 
     // Big sentence
-    const verb = win ? 'solved' : 'played';
-    const suffix = win ? '' : ' (did not finish)';
-    document.getElementById('winline').textContent =
-      `I ${verb} the ${dateDisplay} ${appName} in ${time} (Level: ${level})${suffix}!`;
+    const noTimer = level.toLowerCase() === 'no timer'
+    const verb = noTimer ? 'solved' : 'beat the timer for';
+    const timeSection = noTimer ? '' : ` with a time of ${time}`;
+    const winSentence = `I ${verb} the ${appName} on ${dateDisplay}${timeSection}!`
+
+    const lossVerb = noTimer ? 'solving' : 'beating the timer for';
+    const lossSentence = `I was so close to ${lossVerb} the ${dateDisplay} ${appName}! I will get it next time!`
+    document.getElementById('winline').textContent = win ? winSentence : lossSentence;
+
 
     // Stats (Bulma level)
     document.getElementById('statDate').textContent   = dateDisplay;
