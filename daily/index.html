@@ -35,7 +35,7 @@
       <div class="columns is-mobile is-vcentered ">
         <div class="column is-narrow">
           <figure class="image is-64x64 ">
-            <img src="https://www.minicrossworddaily.com/Logo_Border_colored@2x.png" alt="Mini Crossword Daily logo">
+            <img src="https://www.minicrossworddaily.com/images/Logo_Border_colored@2x.png" alt="Mini Crossword Daily logo">
           </figure>
         </div>
         <div class="column">
@@ -110,12 +110,12 @@
             <div class="columns is-vcentered is-mobile">
               <a class="column" href="https://itunes.apple.com/us/app/crossword-countdown/id1331823417?ls=1&mt=8" aria-label="Download on the App Store">
                 <span class='image'>
-                  <img src="https://www.minicrossworddaily.com/app-store.svg" alt="Download on the App Store">
+                  <img src="https://www.minicrossworddaily.com/images/app-store.svg" alt="Download on the App Store">
                 </span>
               </a>
               <a class="column" href="https://play.google.com/store/apps/details?id=com.dangerappss.mini_crossword_daily" aria-label="Get it on Google Play">
                 <span class='image'>
-                  <img src="https://www.minicrossworddaily.com/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
+                  <img src="https://www.minicrossworddaily.com/images/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
                 </span>
               </a>
             </div>
@@ -123,7 +123,7 @@
         </div>
         <div class="column">
           <figure class="image">
-            <img src="https://www.minicrossworddaily.com/tall-white-home-screen-mini.png" alt="Mini Crossword Daily screenshot">
+            <img src="https://www.minicrossworddaily.com/images/tall-white-home-screen-mini.png" alt="Mini Crossword Daily screenshot">
           </figure>
         </div>
       </div>
@@ -184,7 +184,7 @@
   }
 
   function isWin(v){
-    const s = (v || '').toString().toLowerCase();
+    const s = (v || '1').toString().toLowerCase();
     return ['1','true','yes','y','win','won'].includes(s);
   }
 
@@ -212,7 +212,7 @@
 
     const time  = formatTimeParam(qp.get('time')) || '—';
     const level = titleCase(qp.get('level') || 'Normal');
-    const win   = isWin(qp.get('win'));
+    const win   = isWin(qp.get('won'));
 
     // Inject hero SVG from local files
     const heroPath = win ? pickRandom(winSvgs) : pickRandom(lossSvgs);
