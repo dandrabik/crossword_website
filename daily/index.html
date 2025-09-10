@@ -210,8 +210,10 @@
     const dateDisplay = formatDateParam(qp.get('date')) ||
       new Date().toLocaleDateString(undefined,{ year:'numeric', month:'long', day:'numeric' });
 
-    const time  = formatTimeParam(qp.get('time')) || '—';
     const level = titleCase(qp.get('level') || 'Normal');
+    const noTimer = level.toLowerCase() === 'no timer'
+
+    const time  = noTimer ? '—' : formatTimeParam(qp.get('time')) || '—';
     const win   = isWin(qp.get('won'));
 
     // Inject hero SVG from local files
@@ -221,7 +223,7 @@
     hero.innerHTML = `<figure class="image is-square"><img src="${heroPath}" alt=""></figure>`;
 
     // Big sentence
-    const noTimer = level.toLowerCase() === 'no timer'
+
     const verb = noTimer ? 'solved' : 'beat the timer for';
     const timeSection = noTimer ? '' : ` with a time of ${time}`;
     const winSentence = `I ${verb} the ${appName} on ${dateDisplay}${timeSection}!`
