@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["1331823417.game.crossword-ios"],
+        "components": [
+          { "/": "/daily/*" }
+        ]
+      }
+    ]
+  }
+}

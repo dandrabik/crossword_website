@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Mini Crossword Daily — Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+
+  <!-- Bulma -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+
+  <!-- Basic OG (static) -->
+  <meta property="og:title" content="Mini Crossword Daily">
+  <meta property="og:description" content="Daily mini-crossword puzzles — can you beat the clock?">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.minicrossworddaily.com/images/Logo_Border_colored@2x.png">
+  <meta name="apple-itunes-app"
+      content="app-id=1331823417, app-argument=https://www.minicrossworddaily.com/daily/">
+</head>
+<body>
+
+  <!-- Header: logo + name (single line) -->
+  <section class="section py-4 has-background-white-bis">
+    <div class="container">
+      <div class="columns is-mobile is-vcentered ">
+        <div class="column is-narrow">
+          <figure class="image is-64x64 ">
+            <img src="https://www.minicrossworddaily.com/Logo_Border_colored@2x.png" alt="Mini Crossword Daily logo">
+          </figure>
+        </div>
+        <div class="column">
+          <h1 class="title is-2 is-size-4-mobile">Mini Crossword Daily</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature: Random SVG (left) + big line (right) -->
+  <section class="section has-background-info-90">
+      <div class="columns is-vcentered is-8-desktop ">
+        <div class="column is-one-third">
+            <div id="heroSvg" class="content"></div>
+        </div>
+        <div class="column">
+          <div class ='box'>
+            <p id="winline" class="is-size-3 is-size-5-mobile is-italic has-text-centered-mobile has-text-weight-bold">
+              <!-- populated by JS -->
+            </p>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- Stats using Bulma Level -->
+  <section class="section">
+    <div class="container">
+      <nav class="level">
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading is-size-6 is-size-6-mobile">PUZZLE DATE</p>
+            <p id="statDate" class="title is-3 has-text-info-45">—</p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading is-size-6 is-size-6-mobile">TIME</p>
+            <p id="statTime" class="title is-3 is-size-3-mobile has-text-info-45">—</p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading is-size-6 is-size-6-mobile">LEVEL</p>
+            <p id="statLevel" class="title is-3 has-text-info-45">—</p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading is-size-6 ">RESULT</p>
+            <p id="statResult" class="title is-3 is-5-mobile has-text-success">—</p>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Promo: text left, image right -->
+  <section class="section pt-2">
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          <h2 class="title is-4 has-text-centered-mobile">Daily Mini Crossword Puzzles </h2>
+          <h3 class="subtitle is-4 has-text-centered-mobile">Can you beat the clock?</h3>
+          <div class="content has-text-centered-mobile">
+            <p>
+              Mini Crossword Daily is a crossword puzzle game for iPhone and Android. Solve the
+              mini-crossword before the timer hits zero to keep your win streak alive. New puzzles released
+              daily. Always free.
+            </p>
+            <p class="has-text-weight-semibold">Available now for iPhone and Android</p>
+            <div class="columns is-vcentered is-mobile">
+              <a class="column" href="https://itunes.apple.com/us/app/crossword-countdown/id1331823417?ls=1&mt=8" aria-label="Download on the App Store">
+                <span class='image'>
+                  <img src="https://www.minicrossworddaily.com/app-store.svg" alt="Download on the App Store">
+                </span>
+              </a>
+              <a class="column" href="https://play.google.com/store/apps/details?id=com.dangerappss.mini_crossword_daily" aria-label="Get it on Google Play">
+                <span class='image'>
+                  <img src="https://www.minicrossworddaily.com/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <figure class="image">
+            <img src="https://www.minicrossworddaily.com/tall-white-home-screen-mini.png" alt="Mini Crossword Daily screenshot">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer py-4 has-background-white-bis">
+    <div class="content has-text-centered">
+      © <span id="year"></span> Mini Crossword Daily
+    </div>
+  </footer>
+
+<script>
+  // -------- URL param helpers --------
+  const qp = new URL(location.href).searchParams;
+  const appName = 'Mini Crossword Daily';
+
+  function titleCase(s){ return (s||'').replace(/\w\S*/g, t => t[0].toUpperCase()+t.slice(1).toLowerCase()); }
+
+  // Parse YYYY-MM-DD as a *local* date to avoid UTC shifting (off-by-one)
+  function parseLocalYMD(ymd) {
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(ymd);
+    if (!m) return null;
+    const [_, y, mo, d] = m;
+    return new Date(Number(y), Number(mo) - 1, Number(d));
+  }
+
+  function formatDateParam(d){
+    if (!d) return null;
+    // If YYYY-MM-DD → parse as local date
+    if (/^\d{4}-\d{2}-\d{2}$/.test(d)) {
+      const dt = parseLocalYMD(d);
+      if (dt && !Number.isNaN(+dt)) {
+        return dt.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+      }
+    }
+    // If MM/DD/YYYY or other → let Date parse it
+    if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(d)) {
+      const dt = new Date(d);
+      if (!Number.isNaN(+dt)) {
+        return dt.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+      }
+    }
+    // If a preformatted string, just return it
+    return d;
+  }
+
+  function formatTimeParam(t){
+    if (!t) return null;
+    if (String(t).includes(':')) return t;
+    const s = parseInt(t, 10);
+    if (Number.isFinite(s)) {
+      const mm = Math.floor(s / 60), ss = s % 60;
+      return `${mm}:${String(ss).padStart(2, '0')}`;
+    }
+    return t;
+  }
+
+  function isWin(v){
+    const s = (v || '').toString().toLowerCase();
+    return ['1','true','yes','y','win','won'].includes(s);
+  }
+
+  // -------- Local SVG lists (update paths to match your files) --------
+  const winSvgs  = [
+    '../images/dinos/018-drawing.svg',
+    '../images/dinos/019-cool.svg',
+    '../images/dinos/024-phone-call.svg',
+    '../images/dinos/026-dancing.svg',
+    '../images/dinos/027-sing.svg',
+  ];
+  const lossSvgs = [
+    '../images/dinos/010-angry-1.svg',
+    '../images/dinos/016-embarrassed.svg',
+    '../images/dinos/035-crying.svg',
+    '../images/dinos/036-sick.svg',
+  ];
+
+  function pickRandom(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
+
+  // -------- Fill UI --------
+  (function init(){
+    const dateDisplay = formatDateParam(qp.get('date')) ||
+      new Date().toLocaleDateString(undefined,{ year:'numeric', month:'long', day:'numeric' });
+
+    const time  = formatTimeParam(qp.get('time')) || '—';
+    const level = titleCase(qp.get('level') || 'Normal');
+    const win   = isWin(qp.get('win'));
+
+    // Inject hero SVG from local files
+    const heroPath = win ? pickRandom(winSvgs) : pickRandom(lossSvgs);
+    const hero = document.getElementById('heroSvg');
+    // Use an <img> so it scales naturally within the Bulma .box
+    hero.innerHTML = `<figure class="image is-square"><img src="${heroPath}" alt=""></figure>`;
+
+    // Big sentence
+    const noTimer = level.toLowerCase() === 'no timer'
+    const verb = noTimer ? 'solved' : 'beat the timer for';
+    const timeSection = noTimer ? '' : ` with a time of ${time}`;
+    const winSentence = `I ${verb} the ${appName} on ${dateDisplay}${timeSection}!`
+
+    const lossVerb = noTimer ? 'solving' : 'beating the timer for';
+    const lossSentence = `I was so close to ${lossVerb} the ${dateDisplay} ${appName}! I will get it next time!`
+    document.getElementById('winline').textContent = win ? winSentence : lossSentence;
+
+
+    // Stats (Bulma level)
+    document.getElementById('statDate').textContent   = dateDisplay;
+    document.getElementById('statTime').textContent   = time;
+    document.getElementById('statLevel').textContent  = level;
+
+    // (2) Color the Result text using Bulma helpers
+    const statResultEl = document.getElementById('statResult');
+    statResultEl.textContent = win ? 'Win' : 'Loss';
+    statResultEl.classList.remove('has-text-success', 'has-text-danger');
+    statResultEl.classList.add(win ? 'has-text-success' : 'has-text-danger');
+
+    // Footer year
+    const y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
+  })();
+</script>
+
+</body>
+</html>
