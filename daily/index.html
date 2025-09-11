@@ -30,7 +30,7 @@
 <body>
 
   <!-- Header: logo + name (single line) -->
-  <section class="section py-4 has-background-white-bis">
+  <section class="section py-4 header">
     <div class="container">
       <div class="columns is-mobile is-vcentered ">
         <div class="column is-narrow">
@@ -131,7 +131,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer py-4 has-background-white-bis">
+  <footer class="footer py-4">
     <div class="content has-text-centered">
       © <span id="year"></span> Mini Crossword Daily
     </div>
@@ -213,7 +213,7 @@
     const level = titleCase(qp.get('level') || 'Normal');
     const noTimer = level.toLowerCase() === 'no timer'
 
-    const time  = noTimer ? '—' : formatTimeParam(qp.get('time')) || '—';
+    const time  = noTimer ? '—' : formatTimeParam(qp.get('time')) || '1:29';
     const win   = isWin(qp.get('won'));
 
     // Inject hero SVG from local files
